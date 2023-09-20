@@ -6,7 +6,6 @@ public class BonusScript : MonoBehaviour
     public GameObject mainPlayer;
     public float fireRateBoost = 0.1f;
     private static int fireRateUpgrades = 0;
-    private static bool hasCloned = false;
 
     void Start()
     {
@@ -18,11 +17,11 @@ public class BonusScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))  // Ensure it's the main player
         {
             int randomBonus = Random.Range(0, 1);
+            int cloneSize = GameObject.FindGameObjectsWithTag(tag).Length;
 
-            if ((randomBonus == 0 && !hasCloned) || (fireRateUpgrades == 3 && !hasCloned))
+            if ((randomBonus == 0 && cloneSize < 2) || (fireRateUpgrades == 3 && cloneSize < 2))
             {
                 SpawnClones(mainPlayer);
-                hasCloned = true;
             }
             else if (randomBonus == 1 && fireRateUpgrades < 3)
             {
@@ -39,13 +38,25 @@ public class BonusScript : MonoBehaviour
 
     private void SpawnClones(GameObject player)
     {
-        // Left clone
-        GameObject leftClone = Instantiate(playerPrefab, player.transform.position, Quaternion.identity);
-        AttachCloneController(leftClone, player, -1.0f);
+        // Check for existing clones
+        GameObject existingLeftClone = GameObject.Find("LeftClone");
+        GameObject existingRightClone = GameObject.Find("RightClone");
 
-        // Right clone
-        GameObject rightClone = Instantiate(playerPrefab, player.transform.position, Quaternion.identity);
-        AttachCloneController(rightClone, player, 1.0f);
+        // If no left clone exists, spawn it
+        if (existingLeftClone == null)
+        {
+            GameObject leftClone = Instantiate(playerPrefab, player.transform.position, Quaternion.identity);
+            AttachCloneController(leftClone, player, -1.0f);
+            leftClone.name = "LeftClone";
+        }
+
+        // If no right clone exists, spawn it
+        if (existingRightClone == null)
+        {
+            GameObject rightClone = Instantiate(playerPrefab, player.transform.position, Quaternion.identity);
+            AttachCloneController(rightClone, player, 1.0f);
+            rightClone.name = "RightClone";
+        }
     }
 
     private void AttachCloneController(GameObject clone, GameObject player, float offset)

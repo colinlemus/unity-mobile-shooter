@@ -357,9 +357,12 @@
 "Assets/Scripts/Entities/Health.cs"
 "Assets/Scripts/Entities/Spawner.cs"
 "Assets/Scripts/Player/CloneController.cs"
+"Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
 "Assets/Scripts/Player/PlayerShooting.cs"
 "Assets/Scripts/Player/Projectile.cs"
+"Assets/Scripts/SceneMangement.cs"
+"Assets/Scripts/Utilities/Death.cs"
 -langversion:9.0
 
 /deterministic

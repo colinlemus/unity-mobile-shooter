@@ -14,10 +14,10 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Ouch! " + damage + " damage taken.");
         health -= damage;
         if (health <= 0)
         {
+            PlayerController.instance.IncreaseScore(initialHealth);
             Destroy(gameObject);
         }
     }

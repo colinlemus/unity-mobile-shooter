@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 6926866668256858564}
   - component: {fileID: 7229455944643221638}
   - component: {fileID: 3668087458245603890}
+  - component: {fileID: 7154167916765487780}
   m_Layer: 8
   m_Name: Entity #1
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,3 +151,15 @@ MonoBehaviour:
   health: 3
   maxHealth: 100
   healthGainOnSpawn: 1
+--- !u!114 &7154167916765487780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185795793326856556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57846c964e79814dbff434ee50ff328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
