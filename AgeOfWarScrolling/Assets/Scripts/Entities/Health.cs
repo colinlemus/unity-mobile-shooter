@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            PlayerController.instance.IncreaseScore(initialHealth);
+            UIManager.instance.IncreaseScore(initialHealth);
             Destroy(gameObject);
         }
     }

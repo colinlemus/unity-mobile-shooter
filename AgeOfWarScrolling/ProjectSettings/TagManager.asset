@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Entity
   - Clone
+  - Score
   layers:
   - Default
   - TransparentFX
