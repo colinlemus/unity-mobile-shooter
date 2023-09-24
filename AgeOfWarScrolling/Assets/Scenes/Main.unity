@@ -1012,7 +1012,7 @@ PrefabInstance:
       objectReference: {fileID: 9070119670166003574, guid: c387ffa0fee089d47bccf12cb87a4317, type: 3}
     - target: {fileID: 5472550740272033648, guid: a09fea7be1b84c44abaa06e522dae9e6, type: 3}
       propertyPath: spawnRateDecrease
-      value: 0.2
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5472550740272033648, guid: a09fea7be1b84c44abaa06e522dae9e6, type: 3}
       propertyPath: bonusSpawnInterval

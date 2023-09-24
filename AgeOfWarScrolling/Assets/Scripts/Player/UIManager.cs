@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;  // Singleton instance
     private int score = 0; // Current score
+    private int totalDestroyed = 0; // Total number of destroyed enemies
     public TextMeshProUGUI scoreText;  // Reference to the score display text object
 
     private void Awake()
@@ -20,25 +22,35 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject); // Remove extra instances
             return;
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Manual initialization method
-    public void InitializeScoreText()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        scoreText = GameObject.FindWithTag("score").GetComponent<TextMeshProUGUI>();
+        UpdateScoreTextComponent();
+        UpdateScoreDisplay(GetScore());
+    }
+
+
+    // Update Score Text Component method
+    public void UpdateScoreTextComponent()
+    {
+        scoreText = GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>();
     }
 
     // Update the displayed score
     public void UpdateScoreDisplay(int scoreToDisplay)
     {
         if (scoreText != null)
-            scoreText.text = "Score: " + scoreToDisplay;
+            scoreText.text = "Score: " + scoreToDisplay + " Killed: " + totalDestroyed;
     }
 
     // Increase the score by a specified amount
     public void IncreaseScore(int amount)
     {
         score += amount;
+        totalDestroyed++;
         UpdateScoreDisplay(score);
     }
 
@@ -46,6 +58,15 @@ public class UIManager : MonoBehaviour
     public void DecreaseScore(int amount)
     {
         score -= amount;
+        totalDestroyed--;
+        UpdateScoreDisplay(score);
+    }
+
+    // Reset the score to 0
+    public void ResetScore()
+    {
+        score = 0;
+        totalDestroyed = 0;
         UpdateScoreDisplay(score);
     }
 

@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     public float maxX = 2.0f;
     private float currentSpawnRate;
     private int spawnCounter = 0;
+    private float healthCounter = 0;
     public int bonusSpawnInterval = 10;
 
     void Start()
@@ -31,14 +32,18 @@ public class Spawner : MonoBehaviour
     void SpawnObject()
     {
         spawnCounter++;
+        int floorHealthCounter = Mathf.FloorToInt(healthCounter);
         GameObject prefabToSpawn = (spawnCounter % bonusSpawnInterval == 0) ? bonusPrefab : enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)];
         Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), transform.position.y, transform.position.z);
         GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
         Health healthComponent = spawnedObject.GetComponent<Health>();
+
         if (healthComponent != null)
         {
-            healthComponent.GainHealth();
+            healthComponent.InitializeHealth(floorHealthCounter); 
         }
+
+        healthCounter += 0.1F;
     }
 }
